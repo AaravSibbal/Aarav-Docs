@@ -2,7 +2,11 @@
  * something is not right with page indentation I can feel it
  * fontSize, textArea, textAreaDiv
  */
-import { fontSize, textArea, textAreaDiv, document, format, pageIndentationType } from "./user";
+export const fontSize = (document.getElementById("font-size") as HTMLSelectElement)
+export const textArea = (document.getElementById("text-area") as HTMLParagraphElement)
+export const textAreaDiv = (document.getElementById("text-area-div") as HTMLDivElement)
+
+import { document, format, pageIndentationType } from "user";
 
 function setIndentation(indentation: pageIndentationType){
     if(indentation.left){
@@ -53,8 +57,8 @@ function initFormatingDocument(){
 function initPageIndentation(){
     let indentation:pageIndentationType = {
         left: true,
-        center: null,
-        right: null
+        center: false,
+        right: false
     }
     return indentation
     /*TODO use this to initialize page indentation
@@ -72,16 +76,13 @@ function populateFontSize(){
    console.log("we do reach this point") 
      
 }
-function changeFontSize(){
+export function changeFontSize(){
     if(textArea !== null){
-        textAreaDiv.style.fontSize = fontSize.value
+        textAreaDiv.style.fontSize = fontSize.value+"px"
         console.log("this should be the new fontsize of the div"+fontSize.value)
     }
-    console.log(textArea)
+    console.log(textAreaDiv)
 }
-fontSize.addEventListener('change',function(){
-    changeFontSize()
-});
 
 function makeOptionAttribute(optionValue:string, parent:HTMLSelectElement){
     if(parent !== null){

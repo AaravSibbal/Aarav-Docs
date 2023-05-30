@@ -1,14 +1,11 @@
-export const fontSize = (document.getElementById("font-size") as HTMLSelectElement)
-export const textArea = (document.getElementById("text-area") as HTMLParagraphElement)
-export const textAreaDiv = (document.getElementById("text-area-div") as HTMLDivElement)
 
 
 
 
 export interface pageIndentationType {
-    left: boolean|null;
-    center: boolean|null;
-    right: boolean|null;
+    left: boolean;
+    center: boolean;
+    right: boolean;
 }
 
 export interface format{
@@ -35,10 +32,73 @@ export interface document{
     things like isbold isitalic */
 }
 
-export interface user{
-    username: string;
-    password: string;
+export interface User{
+    username: string|null;
+    password: string|null;
     documents: document[];
 
 }
 
+export let user:User={
+    username: null,
+    password: null,
+    documents: []
+}
+
+function stdPageIndentation(){
+    let newPageIndent:pageIndentationType = {
+        left: true,
+        right: false,
+        center: false,
+    }
+    return newPageIndent
+}
+
+function stdFormat(){
+    let newFormat:format = {
+        startChar: 0,
+        endChar: -1,
+        isBold: false,
+        isItalic: false,
+        isUnderlined: false,
+        isHighlighted: false,
+        highlightColor: null,
+        pageIndentation: stdPageIndentation(),
+        fontSize: 16,
+        fontFamily: "Times New Roman",
+        color: "white"
+    }
+    return newFormat
+}
+function nameNewDoc(){
+    let name = "Untitled Document"
+    if(user.documents.length === 0){
+        return name
+    }
+    else{
+        let counter = 0
+
+        while(true){
+            if(user.documents[counter].name !== name){
+                return name;
+            }
+            counter++
+            name =  `Untitled Document (${counter})`
+            
+        }
+        
+    }
+    
+}
+
+
+function stdDocument(){
+    let formats: format[] = []
+    formats.push(stdFormat())
+    let newDoc: document= {
+        name: nameNewDoc(),
+        text: "",
+        length: 0,
+        formats: formats
+    }
+}
