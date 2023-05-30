@@ -2,7 +2,9 @@
  * something is not right with page indentation I can feel it
  * fontSize, textArea, textAreaDiv
  */
-import { fontSize, textArea, textAreaDiv } from "./user";
+export const fontSize = document.getElementById("font-size");
+export const textArea = document.getElementById("text-area");
+export const textAreaDiv = document.getElementById("text-area-div");
 function setIndentation(indentation) {
     if (indentation.left) {
         indentation.center = false;
@@ -60,16 +62,13 @@ function populateFontSize() {
     }
     console.log("we do reach this point");
 }
-function changeFontSize() {
+export function changeFontSize() {
     if (textArea !== null) {
-        textAreaDiv.style.fontSize = fontSize.value;
+        textAreaDiv.style.fontSize = fontSize.value + "px";
         console.log("this should be the new fontsize of the div" + fontSize.value);
     }
-    console.log(textArea);
+    console.log(textAreaDiv);
 }
-fontSize.addEventListener('change', function () {
-    changeFontSize();
-});
 function makeOptionAttribute(optionValue, parent) {
     if (parent !== null) {
         let option = document.createElement("option");
