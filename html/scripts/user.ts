@@ -1,4 +1,4 @@
-
+//TODO make 
 
 
 
@@ -35,16 +35,50 @@ export interface document{
 export interface User{
     username: string|null;
     password: string|null;
+    currDoc: document|null;
     documents: document[];
+    documentsName: string[];
 
 }
 
 export let user:User={
     username: null,
     password: null,
-    documents: []
+    currDoc: null,
+    documents: [],
+    documentsName: []
 }
 
+function setCurrDoc(doc: document){
+    user.currDoc = doc;
+}
+
+function setIndentation(indentation: pageIndentationType, changedTo: string){
+    if(changedTo == "left"){
+        indentation.left = true;
+        indentation.center = false;
+        indentation.right = false;
+    }
+    else if(changedTo == "right"){
+        indentation.center = false;
+        indentation.left = false
+        indentation.right = true
+    }
+    else{
+        indentation.left = false;
+        indentation.right = false;
+        indentation.center = true;
+    }
+}
+
+
+function getDoc(name: string){
+    return user.documents.find(doc => doc.name===name)
+}
+
+function getCurrDoc(){
+    return user.documents.find(doc => doc.name===user.currDoc?.name)
+}
 function stdPageIndentation(){
     let newPageIndent:pageIndentationType = {
         left: true,
@@ -70,29 +104,38 @@ function stdFormat(){
     }
     return newFormat
 }
-function nameNewDoc(){
-    let name = "Untitled Document"
-    if(user.documents.length === 0){
-        return name
-    }
-    else{
-        let counter = 0
+function findUniqueName(name: string = "Untitiled Document"){
+    let counter = 0
+    let temp = name;
 
         while(true){
-            if(user.documents[counter].name !== name){
+            if(!user.documentsName.includes(name)){
                 return name;
+                
             }
             counter++
-            name =  `Untitled Document (${counter})`
+            name =  `${temp} (${counter})`
             
         }
         
+}
+
+function nameNewDoc(name: string = "Untitled Document"){
+    
+    if(user.documents.length === 0){
+        return name
+    }
+    else if(user.documentsName.includes(name)){
+        return findUniqueName(name)//does not use the default value
+    }
+    else{
+        return findUniqueName()//uses the default value
     }
     
 }
 
 
-function stdDocument(){
+export function makeNewDoc(){
     let formats: format[] = []
     formats.push(stdFormat())
     let newDoc: document= {
@@ -101,4 +144,7 @@ function stdDocument(){
         length: 0,
         formats: formats
     }
+    user.documents.push(newDoc)
+    user.documentsName.push(newDoc.name)
+    return newDoc
 }

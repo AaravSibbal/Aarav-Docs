@@ -5,53 +5,9 @@
 export const fontSize = document.getElementById("font-size");
 export const textArea = document.getElementById("text-area");
 export const textAreaDiv = document.getElementById("text-area-div");
-function setIndentation(indentation) {
-    if (indentation.left) {
-        indentation.center = false;
-        indentation.right = false;
-    }
-    else if (indentation.right) {
-        indentation.center = false;
-        indentation.left = false;
-    }
-    else {
-        indentation.left = false;
-        indentation.right = false;
-    }
-}
 function initailize() {
     console.log("something");
     populateFontSize();
-    initFormatingDocument();
-}
-function initFormatingDocument() {
-    let indentation = initPageIndentation();
-    let format = {
-        startChar: 0,
-        endChar: -1,
-        isBold: false,
-        isItalic: false,
-        isUnderlined: false,
-        isHighlighted: false,
-        highlightColor: null,
-        pageIndentation: indentation,
-        fontSize: 12,
-        fontFamily: "Times New Roman",
-        color: "white",
-    };
-    /*TODO use this to initialize things in the document like font family and
-    stuff like: setIndextation(indentation) or something like that
-    */
-}
-function initPageIndentation() {
-    let indentation = {
-        left: true,
-        center: null,
-        right: null
-    };
-    return indentation;
-    /*TODO use this to initialize page indentation
-    */
 }
 function populateFontSize() {
     let count = 2;
