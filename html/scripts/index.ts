@@ -7,63 +7,11 @@ export const textArea = (document.getElementById("text-area") as HTMLParagraphEl
 export const textAreaDiv = (document.getElementById("text-area-div") as HTMLDivElement)
 
 import { document, format, pageIndentationType } from "user";
-
-function setIndentation(indentation: pageIndentationType){
-    if(indentation.left){
-        indentation.center = false;
-        indentation.right = false
-    }
-    else if(indentation.right){
-        indentation.center = false;
-        indentation.left = false
-    }
-    else{
-        indentation.left = false;
-        indentation.right = false
-    }
-}
-
-
-
-
-
 function initailize(){
     console.log("something")
     populateFontSize()
-    initFormatingDocument()
 }
 
-function initFormatingDocument(){
-    let indentation = initPageIndentation()
-    let format:format = {
-        startChar: 0,
-        endChar: -1,
-        isBold: false,
-        isItalic: false,
-        isUnderlined: false,
-        isHighlighted: false,
-        highlightColor: null,
-        pageIndentation: indentation,
-        fontSize: 12,
-        fontFamily: "Times New Roman",
-        color: "white",
-    }
-
-    /*TODO use this to initialize things in the document like font family and 
-    stuff like: setIndextation(indentation) or something like that
-    */
-}
-
-function initPageIndentation(){
-    let indentation:pageIndentationType = {
-        left: true,
-        center: false,
-        right: false
-    }
-    return indentation
-    /*TODO use this to initialize page indentation
-    */
-}
 
 function populateFontSize(){
     let count =2;
